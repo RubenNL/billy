@@ -2,3 +2,4 @@ package*
 src/java
 src/test
 target
+src/main/resources/resources
