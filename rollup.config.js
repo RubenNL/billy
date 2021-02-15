@@ -7,7 +7,7 @@ import minifyHTML from 'rollup-plugin-minify-html-literals'
 import commonjs from '@rollup/plugin-commonjs'
 const production = process.env.NODE_ENV == 'production'
 export default {
-	input: 'src/index.js',
+	input: 'frontend/index.js',
 	treeshake: production,
 	output: {
 		dir: 'src/main/resources/resources',
@@ -22,15 +22,15 @@ export default {
 	preserveEntrySignatures: 'allow-extension',
 	plugins: [
 		del({targets: 'src/main/resources/resources', runOnce: true}),
-		nodeResolve({moduleDirectories: ['node_modules', 'src']}),
+		nodeResolve({moduleDirectories: ['node_modules', 'frontend']}),
 		commonjs(),
 		copy({
 			targets: [
-				{src: 'src/images/*', dest: 'src/main/resources/resources/images'},
-				{src: 'src/manifest.json', dest: 'src/main/resources/resources'},
-				{src: 'src/service-worker.js', dest: 'src/main/resources/resources'},
-				{src: 'src/index.html', dest: 'src/main/resources/resources'},
-				{src: 'src/robots.txt', dest: 'src/main/resources/resources'},
+				{src: 'frontend/images/*', dest: 'src/main/resources/resources/images'},
+				{src: 'frontend/manifest.json', dest: 'src/main/resources/resources'},
+				{src: 'frontend/service-worker.js', dest: 'src/main/resources/resources'},
+				{src: 'frontend/index.html', dest: 'src/main/resources/resources'},
+				{src: 'frontend/robots.txt', dest: 'src/main/resources/resources'},
 			],
 		}),
 		...(production
@@ -39,7 +39,7 @@ export default {
 					{
 						name: 'watch-external',
 						async buildStart() {
-							const files = await fg('src/**/*')
+							const files = await fg('frontend/**/*')
 							for (let file of files) {
 								this.addWatchFile(file)
 							}

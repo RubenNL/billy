@@ -1,5 +1,3 @@
 package*
-src/java
-src/test
+src
 target
-src/main/resources/resources
