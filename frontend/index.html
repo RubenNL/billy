@@ -1,40 +1,54 @@
-<head>
-	<script>
-		if (window.location.protocol == 'http:' && !window.location.port) window.location.protocol = 'https:' //port om te testen of de heroku wordt geladen. bij heroku is de port leeg.
-	</script>
-	<meta name="theme-color" content="#317EFB" />
-	<link rel="icon" type="image/png" href="/images/logo_32.png" />
-	<link rel="apple-touch-icon" href="/images/logo_32.png" />
-	<link rel="manifest" href="/manifest.json" />
-	<meta name="Description" content="onder-ons" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>onder-ons</title>
-</head>
-<body>
-	<noscript>JS is niet ingeschakeld.</noscript>
-	<button onclick="localStorage.clear();window.location.hash='';window.location.reload();">reset storage(DEBUG)</button>
-	<button id="start">start</button>
-	<app-game></app-game>
-	<app-chat></app-chat>
-	<div id="links">
-		<a href="https://github.com/RubenNL/onder-ons/" target="_blank"><img src="/images/github_50px.webp" /></a><br />
-		<a href="/code" target="_blank">Actieve Code</a>
-	</div>
-</body>
-<style>
-	app-game {
-		float: left;
-	}
-	#links {
-		clear: both;
-		margin: 0 auto;
-		text-align: center;
-	}
-	app-chat {
-		display: block;
-	}
-</style>
-<script type="module" src="index.js"></script>
-<script>
-	if ('serviceWorker' in navigator) navigator.serviceWorker.register('/service-worker.js', {scope: '/'})
-</script>
+<!--Contributors: Ruben, Marlon, Nick, Daniel, Gianni-->
+<!DOCTYPE html>
+<html lang="nl">
+	<head>
+		<script>
+			if (window.location.protocol == 'http:' && !window.location.port) window.location.protocol = 'https:' //port om te testen of de heroku wordt geladen. bij heroku is de port leeg.
+			window.process = {
+				env: {
+					NODE_ENV: 'production',
+				},
+			}
+		</script>
+		<title>OpenICT Wiki</title>
+		<meta name="theme-color" content="#0066c4" />
+		<link rel="icon" type="image/png" href="/images/logo_32px_textless.png" />
+		<link rel="apple-touch-icon" href="/images/logo_32px_textless.png" />
+		<link rel="manifest" href="/manifest.json" />
+		<meta name="Description" content="OpenICT Wiki" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="google-site-verification" content="-B1lctgAH30H38oNV3iRFh7oQEZCiSjPg_ef7LfquIs" />
+	</head>
+	<body>
+		<a class="skip-to-content-link" href="#main" tabindex="0"> Spring naar content </a>
+		<noscript>JS is niet ingeschakeld.</noscript>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-12">
+					<app-header></app-header>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-2">
+					<app-sidebar></app-sidebar>
+				</div>
+				<div class="col-md-10">
+					<main id="main"></main>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<app-footer></app-footer>
+				</div>
+			</div>
+		</div>
+		<link rel="stylesheet" href="/bundle.css" />
+		<script type="module" src="/index.js"></script>
+
+		<script>
+			if ('serviceWorker' in navigator) {
+				navigator.serviceWorker.register('/service-worker.js', {scope: '/'})
+			}
+		</script>
+	</body>
+</html>

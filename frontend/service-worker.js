@@ -1,3 +1,5 @@
+/*Contributors: Ruben */
+
 let timeout = setTimeout(() => {}, 0)
 self.addEventListener('fetch', function (event) {
 	clearTimeout(timeout)
@@ -10,7 +12,7 @@ self.addEventListener('fetch', function (event) {
 	}
 	if (event.request.destination !== '') {
 		event.respondWith(
-			caches.open('onder-ons').then(function (cache) {
+			caches.open('billy').then(function (cache) {
 				return cache.match(event.request).then(function (response) {
 					return (
 						response ||

@@ -1,2 +1,4 @@
 User-agent: *
 Allow: /
+
+SITEMAP: https://fep2.herokuapp.com/sitemap.txt

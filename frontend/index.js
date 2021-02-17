@@ -1,48 +1,76 @@
-window.canvassize = 800
-import 'js/app-chat.js'
-import 'js/app-game.js'
-const gameId = location.hash.split('#')[1] || prompt('gameId?', Math.random().toString(36).substring(7))
-if (!gameId) {
-	alert('geen game ID!')
-	throw new Error()
-}
-location.hash = '#' + gameId
-const name = window.sessionStorage.getItem('name') || prompt('naam?')
-if (!name) {
-	alert('geen naam!')
-	throw new Error()
-}
-window.sessionStorage.setItem('name', name)
-document.querySelector('#start').onclick = () => {
-	const speed = parseInt(prompt('snelheid?'))
-	if (!speed || speed < 5 || speed > 20) {
-		alert('Ongeldige snelheid!')
-		return
-	}
-	ws.send({start: {speed}})
-}
+/*Contributors: Ruben, Gianni, Marlon, Nick, Daniel */
 
-const ws = new WebSocket((location.protocol == 'http:' ? 'ws://' : 'wss://') + (location + '').split('/')[2] + '/?game=' + gameId)
-window.ws = ws
-ws.oldSend = ws.send
-ws.send = message => ws.oldSend(JSON.stringify(message))
-ws.addEventListener('open', () => {
-	ws.send({name})
-	setInterval(() => ws.send({}), 45000) //keepalive for heroku: https://devcenter.heroku.com/articles/http-routing#timeouts
-})
-ws.addEventListener('close', event => {
-	if (event.reason) alert('verbinding verbroken:\n' + event.reason)
-	else alert('verbinding verbroken, geen reason opgegeven.')
-})
-ws.addEventListener('message', event => {
-	const data = JSON.parse(event.data)
-	switch (data.action) {
-		case 'start':
-			document.querySelector('#start').disabled = true
-			break
-	}
-	document.querySelector('app-game').onMessage(data)
-	document.querySelector('app-chat').onMessage(data)
-})
-document.querySelector('app-chat').addEventListener('ws-send', e => ws.send(e.detail))
-document.querySelector('app-game').addEventListener('ws-send', e => ws.send(e.detail))
+import sendAuthenticated from 'js/sendAuthenticated.js'
+window.sendAuthenticated = sendAuthenticated
+
+import {Router} from '@vaadin/router'
+
+const outlet = document.querySelector('main')
+const router = new Router(outlet)
+router.setRoutes([
+	{
+		path: '/register',
+		component: 'app-register',
+		action: () => import('js/app-register.js'),
+	},
+	{
+		path: '/login',
+		component: 'app-inlog',
+		action: () => import('js/app-inlog.js'),
+	},
+	{
+		path: '/register',
+		component: 'app-register',
+		action: () => import('js/app-register.js'),
+	},
+	{
+		path: '/article/:article',
+		component: 'app-artikel',
+		action: () => import('js/app-artikel.js'),
+	},
+	{path: '/', redirect: '/article/1'},
+	{
+		path: '/category/:categoryID',
+		component: 'app-category-page',
+		action: () => import('js/app-category-page.js'),
+	},
+	{
+		path: '/creator/:article',
+		component: 'app-create-article',
+		action: () => import('js/app-create-article.js'),
+	},
+	{
+		path: '/creator',
+		component: 'app-create-article',
+		action: () => import('js/app-create-article.js'),
+	},
+	{
+		path: '/users',
+		component: 'app-manage-users',
+		action: () => import('js/app-manage-users.js'),
+	},
+	{
+		path: '/bookmarks',
+		component: 'app-bookmarks',
+		action: () => import('js/app-bookmarks.js'),
+	},
+	{
+		path: '/editCategory',
+		component: 'app-manage-categories',
+		action: () => import('js/app-manage-categories.js'),
+	},
+	{
+		path: '(.*)',
+		component: 'app-404',
+		action: () => import('js/app-404.js'),
+	},
+])
+import 'js/app-header.js'
+import 'js/app-sidebar.js'
+import 'js/app-search.js'
+import 'js/app-footer.js'
+import 'js/app-button.js'
+
+import 'css/bootstrap.min.css'
+import 'css/style.css'
+import 'css/button-styles.css'

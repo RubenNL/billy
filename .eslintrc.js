@@ -13,4 +13,7 @@ module.exports = {
 		'no-console': 'warn',
 		'no-mixed-spaces-and-tabs': ['error', 'smart-tabs'],
 	},
+	globals: {
+		sendAuthenticated: true,
+	},
 }

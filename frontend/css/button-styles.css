@@ -1,0 +1,16 @@
+/*Contributors: Marlon */
+
+input[type='submit'] {
+	display: block;
+	text-align: center;
+	text-decoration: none;
+	border: none;
+	border-radius: 3px;
+	box-sizing: border-box;
+	width: unset;
+	padding: 7px 35px;
+	background-color: #0066c4;
+	color: #fff;
+	font-size: 14px;
+	cursor: pointer;
+}
