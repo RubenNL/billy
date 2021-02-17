@@ -9,11 +9,11 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>nl.hu.cisq1</groupId>
-	<artifactId>lingo</artifactId>
+	<artifactId>billy</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>lingo</name>
+	<name>billy</name>
 	<packaging>war</packaging>
-	<description>Lingo trainer for CISQ1 at the HU</description>
+	<description>Billy!</description>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -22,10 +22,10 @@
 		<sonar.projectKey>RubenNL_java-rollup-test</sonar.projectKey>
 		<sonar.organization>rubennl</sonar.organization>
 		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
-		<cisq.runningmvn>mvnUrl</cisq.runningmvn>
-		<cisq.heroku>package</cisq.heroku>
-		<cisq.owasp>package</cisq.owasp>
-		<sonar.exclusions>**/LingoApplication.java</sonar.exclusions>
+		<billy.runningmvn>mvnUrl</billy.runningmvn>
+		<billy.heroku>package</billy.heroku>
+		<billy.owasp>package</billy.owasp>
+		<sonar.exclusions>**/BillyApplication.java</sonar.exclusions>
 	</properties>
 
 	<dependencies>
@@ -83,7 +83,7 @@
 				<version>6.1.1</version>
 				<executions>
 					<execution>
-						<phase>${cisq.owasp}</phase>
+						<phase>${billy.owasp}</phase>
 						<goals>
 							<goal>check</goal>
 						</goals>
@@ -108,7 +108,7 @@
 				<artifactId>maven-dependency-plugin</artifactId>
 				<executions>
 					<execution>
-						<phase>${cisq.heroku}</phase>
+						<phase>${billy.heroku}</phase>
 						<goals>
 							<goal>copy</goal>
 						</goals>
@@ -144,7 +144,7 @@
 						</goals>
 						<configuration>
 							<excludes>
-								<exclude>**/LingoApplication.*</exclude>
+								<exclude>**/BillyApplication.*</exclude>
 							</excludes>
 						</configuration>
 					</execution>

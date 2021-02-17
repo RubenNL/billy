@@ -19,6 +19,7 @@ app.use(
 	})
 )
 
-app.use('/', proxy('http://localhost:8080/'))
+app.use('/api/', proxy('http://localhost:8080', {proxyReqPathResolver: req => `/api/${req.url}`}))
+app.use((req, res) => res.sendFile(__dirname + '/src/main/resources/resources/index.html'))
 
 server.listen(process.env.PORT || 8000)

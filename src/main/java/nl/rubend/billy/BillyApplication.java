@@ -1,12 +1,12 @@
-package nl.rubend.javarolluptest;
+package nl.rubend.billy;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 @SpringBootApplication
-public class LingoApplication extends SpringBootServletInitializer {
+public class BillyApplication extends SpringBootServletInitializer {
     public static void main(String[] args) {
-        SpringApplication.run(LingoApplication.class, args);
+        SpringApplication.run(BillyApplication.class, args);
     }
 }

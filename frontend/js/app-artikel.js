@@ -37,7 +37,7 @@ export class appArtikel extends connect(store)(LitElement) {
 	render() {
 		//language=HTML
 		if (this._404) return html`<app-404></app-404>`
-		return html` <div id="meta">
+		return html`<div id="meta">
 				${this._loggedIn
 					? html`
 							${this._functie === 'student' ? html`` : html`${this.checkDeleted(this._categoryID)}`}
@@ -126,7 +126,7 @@ export class appArtikel extends connect(store)(LitElement) {
 
 	set src(val) {
 		this._src = val
-		fetch(`/api/getArticle/${val}`)
+		fetch(`/api/article/${val}`)
 			.then(response => response.json())
 			.then(response => {
 				this._404 = !response
