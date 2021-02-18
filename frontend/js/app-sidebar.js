@@ -7,7 +7,7 @@ import {connect} from 'pwa-helpers/connect-mixin.js'
 export class appSidebar extends connect(store)(LitElement) {
 	static get properties() {
 		return {
-			_categories: {type: Array},
+			_topCategories: {type: Array},
 			_functie: {type: String},
 		}
 	}
@@ -18,11 +18,11 @@ export class appSidebar extends connect(store)(LitElement) {
 
 	constructor() {
 		super()
-		this._categories = []
-		fetch(`/api/getCategories`)
+		this._topCategories = []
+		fetch(`/api/category/top`)
 			.then(response => response.json())
 			.then(response => {
-				this._categories = response
+				this._topCategories = response
 			})
 		this.classList.add('bg-container')
 	}
@@ -98,13 +98,10 @@ export class appSidebar extends connect(store)(LitElement) {
 			<nav>
 				${this._functie ? this.determineAcces() : html``}
 				<ul id="side-nav">
-					${this._categories.map(
+					${this._topCategories.map(
 						hoofdcat => html`
 							<li>
-								<h3 class="head-item">${hoofdcat.headcatagory} (${hoofdcat.count})</h3>
-								<ul class="side-nav-sub">
-									${hoofdcat.subcatagories.map(sub => html` <li class="sub-item"><a router-link href="/category/${sub.id}#main">${sub.title} (${sub.count})</a></li>`)}
-								</ul>
+								<h3 class="head-item">${hoofdcat.name} (3)</h3>
 							</li>
 						`
 					)}
@@ -113,5 +110,8 @@ export class appSidebar extends connect(store)(LitElement) {
 		`
 	}
 }
+// 								<ul class="side-nav-sub">
+// 									${hoofdcat.subcatagories.map(sub => html` <li class="sub-item"><a router-link href="/category/${sub.id}#main">${sub.title} (${sub.count})</a></li>`)}
+// 								</ul>
 
 customElements.define('app-sidebar', appSidebar)

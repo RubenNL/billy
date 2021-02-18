@@ -2,8 +2,7 @@ package nl.rubend.billy.presentation;
 
 import nl.rubend.billy.data.SpringArticleRepository;
 import nl.rubend.billy.domain.Article;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import nl.rubend.billy.presentation.DTO.ArticleDTO;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -15,9 +14,8 @@ public class ArticleController {
 		this.repository = repository;
 	}
 	@GetMapping("{code}")
-	@ResponseStatus(HttpStatus.OK)
-	public Article get(@PathVariable Integer code) {
-		return repository.findById(code).orElse(null);
+	public ArticleDTO get(@PathVariable Integer code) {
+		return new ArticleDTO(repository.findById(code).orElse(null));
 	}
 	@PostMapping
 	public Article create(@RequestBody Article article) {
